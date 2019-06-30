@@ -8,23 +8,23 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
     const db = client.db('TodoApp');
 
     //insert Document (insertOne())
-    // db.collection('Users').insertOne({
-    //     text: 'abed',
-    //     age: 1423
-    // }, (err, result) => {
-    //     if (err) {
-    //         return console.log('Unable to insert');
-    //     }
-    //     console.log(JSON.stringify(result.ops, undefined, 2));
-    // });
+    db.collection('todos').insertOne({
+        text: 'abed',
+        knowledge:true
+    }, (err, result) => {
+        if (err) {
+            return console.log('Unable to insert');
+        }
+        console.log(JSON.stringify(result.ops, undefined, 2));
+    });
 
 
     //find (find({..}))         =>       select
-    db.collection('Todos').find().toArray().then((doc) => {
-        console.log(JSON.stringify(doc, undefined,2));
-    }, (err) => {
-            console.log('Unable to fetch',err);
-    });
+    // db.collection('Todos').find().toArray().then((doc) => {
+    //     console.log(JSON.stringify(doc, undefined,2));
+    // }, (err) => {
+    //         console.log('Unable to fetch',err);
+    // });
 
 
     //delete (deleteMany({..}))    =>      deletes all documents
