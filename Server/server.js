@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyparser = require('body-parser');
 
-var { mongoose } = require('./db/mongoose.js');
+var { mongoose,ObjectID } = require('./db/mongoose.js');
 var { todos } = require('./models/todos');
 var { users } = require('./models/users');
 
@@ -28,6 +28,19 @@ app.get('/todos', (req,res) => {            //get from db and show it
     }, (err) => {
         res.status(400).send(err);
     })
+});
+
+app.get('/todos/:id', (req, res) => {       //reqiust id and get document
+    var id = req.params.id;
+    if (!ObjectID.isValid(id))              //test validation of id
+        return res.status(404).send('404 Not Found');
+    todos.findById(id).then((doc) => {
+        if (!doc)                           //document not found
+            res.status(400);
+        res.send({ doc });
+    }).catch((err) => {
+        res.status(400);
+    });
 });
 
 

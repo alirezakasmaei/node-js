@@ -8,19 +8,18 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
     const db = client.db('TodoApp');
 
     //insert Document (insertOne())
-    db.collection('todos').insertOne({
-        text: 'abed',
-        knowledge:true
-    }, (err, result) => {
-        if (err) {
-            return console.log('Unable to insert');
-        }
-        console.log(JSON.stringify(result.ops, undefined, 2));
-    });
-
+    // db.collection('todos').insertOne({
+    //     text: 'abed',
+    //     knowledge:true
+    // }, (err, result) => {
+    //     if (err) {
+    //         return console.log('Unable to insert');
+    //     }
+    //     console.log(JSON.stringify(result.ops, undefined, 2));
+    // });
 
     //find (find({..}))         =>       select
-    // db.collection('Todos').find().toArray().then((doc) => {
+    // db.collection('todos').find().toArray().then((doc) => {
     //     console.log(JSON.stringify(doc, undefined,2));
     // }, (err) => {
     //         console.log('Unable to fetch',err);
