@@ -44,6 +44,20 @@ app.get('/todos/:id', (req, res) => {       //reqiust id and get document
 });
 
 
+app.delete('/todos/:id', (req, res) => {           //reqiust id and delete  the document
+    var id = req.params.id;
+    if (!ObjectID.isValid(id))
+        return res.status(404);
+    todos.findByIdAndDelete(id).then((result) => {
+        if (!result)
+            return res.status(400);
+        res.send(result);
+    }).catch((err) => {
+        return res.status(400);
+    })
+})
+
+
 app.listen((3000), () => {
     console.log('started on port 30000')
 })
