@@ -1,7 +1,7 @@
 const { mongoose,ObjectID } = require('./Server/db/mongoose.js')
 const { todos } = require('./Server/models/todos.js')
 //find
-var id = '5d18c6ff04f5491468b1c2e5';
+var id = '5d1b7463d6bd261d31b47337';
 if (!ObjectID.isValid(id)) {
     console.log('id isn\'t valid');
 }
@@ -13,8 +13,9 @@ if (!ObjectID.isValid(id)) {
 //     console.log(doc);
 // });
 
-// //remove
-// todos.remove('5d1b61bdd6bd261d31b46ff5').then((result) => {
+//remove
+// var bb = new ObjectID("5d2ddab61bee600f0886361e");
+// todos.remove(bb).then((result) => {
 //     console.log(result);
 // })
 

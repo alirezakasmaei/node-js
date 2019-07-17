@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyparser = require('body-parser');
+const _ = require('lodash');
 
 var { mongoose,ObjectID } = require('./db/mongoose.js');
 var { todos } = require('./models/todos');
@@ -56,6 +57,27 @@ app.delete('/todos/:id', (req, res) => {           //reqiust id and delete  the 
         return res.status(400);
     })
 })
+
+
+app.patch('/todos/:id', (req, res) => {
+    var id = req.params.id;
+    var body = _.pick(req.body, ['text', 'knowledge']);         //body = {text:... , knowledge:...}
+
+    if (!ObjectID.isValid(id))
+        return res.status(404).send();
+    if (_.isBoolean(body.knowledge) && body.knowledge)
+        body.knowledge = true;
+    else{
+        body.knowledge = false;
+    }
+    todos.findByIdAndUpdate(id, { $set: body }, { new: true }).then((todo) => {
+        if (!todo)
+            return res.status(400).send();
+        res.send({ todo });
+    }).catch((e) => {
+        res.status(400).send(e);
+    })
+});
 
 
 app.listen((3000), () => {
