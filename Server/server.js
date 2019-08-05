@@ -45,7 +45,7 @@ app.get('/todos/:id', (req, res) => {       //reqiust id and get document
 });
 
 
-app.delete('/todos/:id', (req, res) => {           //reqiust id and delete  the document
+app.delete('/todos/:id', (req, res) => {           //reqiust id and delete the document
     var id = req.params.id;
     if (!ObjectID.isValid(id))
         return res.status(404);
@@ -59,7 +59,7 @@ app.delete('/todos/:id', (req, res) => {           //reqiust id and delete  the 
 })
 
 
-app.patch('/todos/:id', (req, res) => {
+app.patch('/todos/:id', (req, res) => {         //update 'knowledge' of a document
     var id = req.params.id;
     var body = _.pick(req.body, ['text', 'knowledge']);         //body = {text:... , knowledge:...}
 
@@ -80,6 +80,17 @@ app.patch('/todos/:id', (req, res) => {
 });
 
 
+app.post('/users', (req, res) => {                  //post email and pass to db
+    var body = _.pick(req.body, ['email', 'password'])
+    var user = new users(body);
+    user.save().then((user) => {
+        res.send(user)
+    }).catch((err) => {
+        res.status(400).send(err);
+    }); 
+})
+
+
 app.listen((3000), () => {
-    console.log('started on port 30000')
+    console.log('started on port 3000')
 })
